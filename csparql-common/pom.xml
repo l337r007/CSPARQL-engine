@@ -50,7 +50,7 @@
 	<parent>
 		<groupId>eu.larkc.csparql</groupId>
 		<artifactId>CSPARQL-engine</artifactId>
-		<version>0.9.7</version>
+		<version>0.10.0-jena3</version>
 	</parent>
 	<artifactId>csparql-common</artifactId>
 	<packaging>jar</packaging>
