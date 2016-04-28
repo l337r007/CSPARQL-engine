@@ -50,8 +50,6 @@ void Prologue() : { Token t;} {
 				t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
 				| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
 				| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-				| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-				| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 			)+
 			(t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; })*
 			t = <IRIref> { sparqlQuery = sparqlQuery + t.image ; }
@@ -86,8 +84,6 @@ void AddClause() : { Token t;} {
 			t = <AS> { sparqlQuery = sparqlQuery + t.image ; }
 			| t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
 			| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-			| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-			| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 			| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
 		)+
 		t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
@@ -105,8 +101,6 @@ void DescribeClause() : { Token t;} {
 		| t = <AS> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
 		)+
 		t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
@@ -125,8 +119,6 @@ void SelectClause() : { Token t;} {
 	(LOOKAHEAD(3)
 		  t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <IRIref> { sparqlQuery = sparqlQuery + t.image ;}
 		| t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
@@ -140,8 +132,6 @@ void ConstructClause() : { Token t;} {
 	(LOOKAHEAD(3)
 		t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
 		| t = <IRIref> { sparqlQuery = sparqlQuery + t.image ;}
 		| t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
@@ -254,8 +244,6 @@ void WhereClause() : { Token t;} {
 			(
 				  t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
 				| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-				| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-				| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 				| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
 				| t = < IRIref > { sparqlQuery = sparqlQuery + t.image ; }
 				| t = <SELECT> { sparqlQuery = sparqlQuery + t.image ; }
@@ -265,13 +253,9 @@ void WhereClause() : { Token t;} {
 			| t = <SPACE> { sparqlQuery = sparqlQuery + t.image ; }
 		)+
 		| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-		| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 		(
 			  t = <SINGLELETTERTEXT> { sparqlQuery = sparqlQuery + t.image ; }
 			| t = <SYMBOL> { sparqlQuery = sparqlQuery + t.image ; }
-			| t = <OPENING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
-			| t = <CLOSING_ANGLED> { sparqlQuery = sparqlQuery + t.image ; }
 			| t = <NUMBERS> { sparqlQuery = sparqlQuery + t.image ; }
 			| t = < IRIref > { sparqlQuery = sparqlQuery + t.image ; }
 			| t = <SELECT> { sparqlQuery = sparqlQuery + t.image ; }
@@ -303,7 +287,7 @@ TOKEN [IGNORE_CASE] :
 	| <NUMBERS: ["0"-"9"] >
 	| <OPENING_ANGLED: "[">
 	| <CLOSING_ANGLED: "]">
-	| <SYMBOL: ["$"-"/",":"-"?","{"-"~","!","\"","^","_","'","#","@","(",")"]>
+	| <SYMBOL: (["$"-"/",":"-"?","{"-"~","!","\"","^","_","'","#","@","(",")"] | <OPENING_ANGLED> | <CLOSING_ANGLED>)>
 	| <IRIref: "<" (~["\"", "{", "}", "^", "\\", "|", "`","\u0000"-"\u0020"])* ">">
 	| <SPACE: " ">
 }
