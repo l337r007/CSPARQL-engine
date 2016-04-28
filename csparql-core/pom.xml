@@ -91,6 +91,12 @@ the specific language governing permissions and limitations under the License. -
 			<artifactId>csparql-sparql-sesame</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
