@@ -159,6 +159,7 @@ void FromStreamClause() : {  Token t ; String streamName =""; String s1 =""; }
 	(<SPACE>)*
 	<RANGE>
 	window = Window()
+	(<SPACE>)*
 	<CLOSING_ANGLED>
 	(<SPACE>)*
 	{
