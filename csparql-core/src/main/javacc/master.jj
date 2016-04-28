@@ -15,7 +15,6 @@ public class CsparqlParser extends CsparqlParserBase
 {
 	public static CsparqlParser createAndParse(String queryString) throws ParseException{
 		CsparqlParser parser = new CsparqlParser(new StringReader(TextUtilities.queryTextEnhancer(queryString)));
-		System.out.println(TextUtilities.queryTextEnhancer(queryString));
 		parser.Query();
 		return parser;
 	}
